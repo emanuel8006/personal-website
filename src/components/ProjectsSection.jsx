@@ -23,7 +23,7 @@ export const ProjectsSection = () => {
             </h2>
 
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-               Here are some of my recent projects. Each rpoject was carefully crafted 
+               Here are some of my recent projects. Each project was carefully crafted 
                with attention to detail, performance, and user experience.
             </p>
 
@@ -82,7 +82,7 @@ export const ProjectsSection = () => {
                   target="_blank"
                   href="https://github.com/emanuel8006"
                >
-                  Chech My GitHub <ArrowRight size={16} />
+                  Check My GitHub <ArrowRight size={16} />
                </a>
             </div>
          </div>
