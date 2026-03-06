@@ -1,6 +1,14 @@
 import { ArrowDown } from "lucide-react";
 
-
+/**
+ * HeroSection — First screen of the portfolio (above the fold).
+ *
+ * Renders the main headline, short bio, and primary CTA. Uses CSS animations
+ * from index.css (animate-fade-in, animate-fade-in-delay-*) for staggered
+ * entrance. The scroll hint at the bottom encourages users to go to #projects.
+ *
+ * @returns {JSX.Element} Hero section with id="hero" for nav and smooth scroll.
+ */
 export const HeroSection = () => {
    return (
       <section 

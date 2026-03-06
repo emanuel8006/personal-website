@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+/** Navigation links: display name and href (anchor targets on the same page). */
 const navItems = [
     {name: "Home", href: "#hero"},
     {name: "About", href: "#about"},
@@ -10,11 +11,24 @@ const navItems = [
     {name: "Contact", href: "#contact"},
 ];
 
+/**
+ * Navbar — Fixed top navigation with desktop links and mobile hamburger menu.
+ *
+ * Two pieces of state: isScrolled (for adding background/blur when user
+ * scrolls) and isMenuOpen (for showing/hiding the full-screen mobile menu).
+ * useEffect subscribes to "scroll" and cleans up on unmount. The mobile menu
+ * is a fixed overlay that becomes visible when isMenuOpen is true; clicking
+ * a link closes it (setIsMenuOpen(false)). cn() is used to combine class
+ * names conditionally (e.g. scrolled vs not, menu open vs closed). Nav link
+ * hrefs match section ids (#hero, #about, etc.) for in-page navigation.
+ *
+ * @returns {JSX.Element} Fixed <nav> with logo, desktop links, and mobile menu.
+ */
 export const Navbar = () => {
    const [isScrolled, setIsScrolled] = useState(false); // for desktop
    const [isMenuOpen, setIsMenuOpen] = useState(false); // for mobile devices
 
-
+   /** Update isScrolled on scroll; cleanup removes listener when component unmounts. */
    useEffect(() => {
       const handleScroll = () => {
          setIsScrolled(window.screenY > 10)

@@ -1,7 +1,23 @@
+/**
+ * index.css — Global styles for the portfolio (React + Vite)
+ *
+ * This file is the main stylesheet. It:
+ * 1. Imports Tailwind CSS so utility classes (e.g. flex, p-4) work everywhere.
+ * 2. Defines design tokens (colors, animations) and base styles.
+ * 3. Defines custom Tailwind utilities used across components.
+ *
+ * Tailwind v4 uses @theme and @layer; this file follows that structure.
+ */
+
 @import "tailwindcss";
 
 
+/* ========== Design tokens & animations ==========
+ * @theme makes these variables available to Tailwind utilities (e.g. bg-background, text-primary).
+ * HSL values are stored without "hsl()" so we can wrap them in hsl(var(--name)) for opacity support.
+ */
 @theme {
+  /* Semantic color names used by Tailwind (e.g. bg-background, text-primary). */
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -11,6 +27,7 @@
 
   --color-card: hsl(var(--card));
 
+  /* Named animation shortcuts; use with Tailwind's animate-* (e.g. animate-float). */
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
   --animate-fade-in: fade-in 0.7s ease-out forwards;
@@ -20,6 +37,7 @@
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
 
+  /* Gentle up-down motion (e.g. for decorative elements). */
   @keyframes float {
     0%,
     100% {
@@ -29,6 +47,7 @@
       transform: translateY(-10px);
     }
   }
+  /* Slight opacity pulse (e.g. for star background). */
   @keyframes pulse-subtle {
     0%,
     100% {
@@ -38,6 +57,7 @@
       opacity: 0.8;
     }
   }
+  /* Fade in and move up; used for hero text with staggered delays. */
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -48,6 +68,7 @@
       transform: translateY(0);
     }
   }
+  /* Meteor streak: rotates, moves left, fades out. */
   @keyframes meteor {
     0% {
       transform: rotate(215deg) translateX(0);
@@ -63,7 +84,12 @@
   }
 }
 
+/* ========== Base layer: defaults and theme variables ==========
+ * Styles in @layer base apply to raw HTML elements and theme roots.
+ * :root = light theme; .dark = dark theme (class added to <html> by ThemeToggle).
+ */
 @layer base{
+  /* Light theme: HSL values are (hue, saturation%, lightness%) only; hsl() is added where used. */
   :root {
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
@@ -76,6 +102,7 @@
     --border: 214 32% 91%;
   }
 
+  /* Dark theme: applied when <html> has class "dark". */
   .dark {
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
@@ -88,20 +115,26 @@
     --border: 217 33% 20%;
   }
 
+  /* Default border color for all elements (can be overridden). */
   * {
     @apply border-border;
   }
 
+  /* Smooth scroll when clicking in-page links (e.g. #about, #contact). */
   html {
     @apply scroll-smooth;
   }
 
+  /* Page background/text and smooth theme transition when toggling light/dark. */
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
+/* ========== Custom utilities ==========
+ * @utility creates Tailwind-like classes (e.g. container, text-glow) used in JSX className.
+ */
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
@@ -124,15 +157,18 @@
   };
 }
 
+/* Soft purple glow for text (e.g. navbar name). */
 @utility text-glow {
   @apply relative;
   text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
 }
 
+/* Card lift and shadow on hover (projects, about cards). */
 @utility card-hover {
   @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg; 
 }
 
+/* Card-style box with rounded corners; used for about/skills cards. */
 @utility gradient-border {
   @apply relative rounded-md;
   background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
@@ -140,22 +176,26 @@
   border: 1px solid transparent;
 }
 
+/* Primary CTA button: pill shape, hover glow and scale. */
 @utility cosmic-button {
   @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
           hover:scale-105 active:scale-95;
 }
 
+/* Single star dot for StarBackground (white circle with glow). */
 @utility star {
   @apply absolute rounded-full bg-white;
   box-shadow: 0 0 10px 2px rgba(255,255,255,0.4);
 }
 
+/* Meteor streak shape for StarBackground (gradient line). */
 @utility meteor {
   @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255,255,255,0.3);
 }
 
+/* Root div where React mounts the app (see main.jsx). Constrains width and centers content. */
 #root {
   max-width: 100%;
   margin: 0 auto;

@@ -1,5 +1,10 @@
-import { ArrowRight, ExternalLink, GithubIcon } from "lucide-react"
+import { ArrowRight, ExternalLink, GithubIcon } from "lucide-react";
 
+/**
+ * Data source for the projects grid. Each item needs: id, title, description,
+ * image path, tags array, demoUrl, githubUrl. Adding more items here will
+ * render more cards automatically (see the .map() in the component).
+ */
 const projects = [
    {
     id: 1,
@@ -11,8 +16,19 @@ const projects = [
     githubUrl: "https://github.com/CallumJ25/Hackbeanpot-Project-Prometheus",
    }
    //FUTURE: ADD MORE PROJECT FOLLOWING THE FORMAT ABOVE
-]
+];
 
+/**
+ * ProjectsSection — Featured projects grid and link to GitHub.
+ *
+ * Maps over the `projects` array to render each as a card (image, tags,
+ * title, description, demo + GitHub links). Uses Tailwind responsive grid
+ * (grid-cols-1 md:grid-cols-2 lg:grid-cols-3). The "Check My GitHub" button
+ * uses the cosmic-button utility. key={key} in the map uses array index;
+ * for production you might prefer key={project.id} for stable identity.
+ *
+ * @returns {JSX.Element} Section with id="projects" for navigation.
+ */
 export const ProjectsSection = () => {
    return (
       <section id="projects" className="py-24 px-4 relative">

@@ -3,11 +3,23 @@ import { cn } from "@/lib/utils";
 import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
 
-
+/**
+ * ContactSection — Contact info and a "Send a Message" form.
+ *
+ * Left column: contact details (email, phone, location) and LinkedIn link.
+ * Right column: form (name, email, message). On submit, handleSubmit calls
+ * e.preventDefault() so the page doesn't reload, then shows a toast after a
+ * 1.5s timeout (placeholder; in production you'd send to an API). Uses
+ * useToast() from the app's toast context; Toaster component must be in the
+ * tree to display toasts.
+ *
+ * @returns {JSX.Element} Section with id="contact" for navigation.
+ */
 export const ContactSection = () => {
    const { toast } = useToast();
    const {isSubmitting, setIsSubmitting} = useState(false);
 
+   /** Prevents default form submit and shows a success toast after a short delay. */
    const handleSubmit = (e) => {
       e.preventDefault();
 

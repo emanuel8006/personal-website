@@ -1,6 +1,15 @@
 import { Briefcase, Code, User } from "lucide-react";
 
-
+/**
+ * AboutSection — "About Me" block with intro text and skill cards.
+ *
+ * Two-column layout: left = title, bio paragraphs, and CTAs (Get In Touch,
+ * Download Resume); right = three gradient-border cards (Web Dev, UI/UX,
+ * Backend). Uses custom utilities from index.css: gradient-border, card-hover,
+ * cosmic-button.
+ *
+ * @returns {JSX.Element} Section with id="about" for navigation.
+ */
 export const AboutSection = () => {
    return (
       <section id="about" className="py-24 px-4 relative">

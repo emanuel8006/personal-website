@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * List of skills shown in the skills grid. Each object: name, level (0–100),
+ * category ("frontend" | "backend" | "tools"). category is used for filtering
+ * when the user clicks the category buttons. Note: one object has "catergory"
+ * typo — consider fixing for consistent filtering.
+ */
 const skills = [
    /* Each skill should be its own object, formatted as the example below */
    //Front End
@@ -19,9 +25,19 @@ const skills = [
    { name: "Cursor", level: 70, category: "tools" },
 ];
 
+/** Category filter options; "all" shows every skill. */
 const categories = ["all", "frontend", "backend", "tools"];
 
-
+/**
+ * SkillsSection — Filterable skills grid with progress bars.
+ *
+ * Uses React state: activeCategory drives which skills are shown. filteredSkills
+ * is derived from skills (all when "all", otherwise by skill.category). The
+ * progress bar width is set with style={{ width: skill.level + "%" }}. cn()
+ * is used to conditionally apply "active" button styles.
+ *
+ * @returns {JSX.Element} Section with id="skills" for navigation.
+ */
 export const SkillsSection = () => {
    const [activeCategory, setActiveCategory] = useState("all");
 

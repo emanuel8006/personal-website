@@ -2,9 +2,22 @@ import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * ThemeToggle — Button to switch between light and dark theme.
+ *
+ * Theme is persisted in localStorage under the key "theme" and applied by
+ * adding/removing the "dark" class on document.documentElement (<html>).
+ * index.css defines .dark { ... } overrides for colors. useEffect runs once
+ * on mount (empty dependency array []) to read localStorage and set initial
+ * state and class. toggleTheme updates both DOM and localStorage so the
+ * choice survives page reloads.
+ *
+ * @returns {JSX.Element} A button showing Sun (in dark mode) or Moon (in light).
+ */
 export const ThemeToggle = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
+    /** On first load, sync state and <html> class with saved theme. */
     useEffect(() => {
       const storedTheme = localStorage.getItem("theme");
       if (storedTheme == "dark") {
@@ -16,6 +29,7 @@ export const ThemeToggle = () => {
       }
    }, []);
 
+    /** Toggle dark/light and persist to localStorage. */
     const toggleTheme = () => {
       if (isDarkMode) {
          document.documentElement.classList.remove("dark")

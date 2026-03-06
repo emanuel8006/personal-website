@@ -1,6 +1,13 @@
-import { ArrowUp } from "lucide-react"
+import { ArrowUp } from "lucide-react";
 
-
+/**
+ * Footer — Site footer with copyright and back-to-top link.
+ *
+ * Renders dynamic year via new Date().getFullYear() and a button that
+ * scrolls to #hero (smooth scroll is enabled in index.css on html).
+ *
+ * @returns {JSX.Element} Footer element with id not required (no nav target).
+ */
 export const Footer = () => {
    return (
       <footer className="py-12 px-4 bg-card relative border-t border-border mt-12 pt-8 flex flex-wrap justify-between items-center">
